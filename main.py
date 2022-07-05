@@ -7,7 +7,7 @@ from typing import  Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from model import predict_confirmed, convert_confirmed,predict_death,convert_death
+from model import predict_confirmed, convert_confirmed,predict_death,convert_death,predict_confirmed_weekly, convert_confirmed_weekly
 
 app = FastAPI()
 
@@ -31,23 +31,32 @@ async def pong():
 
 #Route For Confirmed Cases
 
-@app.post("/confirmed/")
+@app.post("/confirmed/daily")
 def get_prediction(days: Data_input):
+    data = []
     day = days.day
-    prediction_list = predict_confirmed(day)  
-    response_object = {"ticker": days, "forecast": convert_confirmed(prediction_list)}
-    return response_object
+    for x in range(day):
+        prediction_list = predict_confirmed(x)  
+        response_object =  convert_confirmed(prediction_list)
+        print(response_object)
+        data.append(response_object)
+    return data
    
 
 #Route For Death Cases
 
-@app.post("/death/")
+@app.post("/death/daily")
 def get_prediction(days: Data_input):
-    day = days.day
+    day = days.day   
     prediction_list = predict_death(day)  
-    response_object = {"ticker": days, "forecast": convert_death(prediction_list)}
-    return response_object
+    response_object =  convert_death(prediction_list)
+    print(response_object)
+    data.append(response_object)
+return data
    
+
+
+
 
 
 

@@ -34,12 +34,12 @@ def predict_confirmed(days):
     predict = forecast.tail(days+1).to_dict("records")
     return predict
 
-#
+
 def convert_confirmed(prediction_list):
     output={}
     for df in prediction_list:
-        pre_data = df["ds"].strftime("%m/%d/%Y")
-        output[pre_data] = df["yhat"]
+        output['dates'] = df["ds"].strftime("%m/%d/%Y")
+        output['cases'] = df["yhat"]
     return output
 
 
@@ -53,11 +53,15 @@ def predict_death(days):
     predict = forecast.tail(days+1).to_dict("records")
     return predict
 
-#
+
 def convert_death(prediction_list):
     output={}
-    for df in prediction_list:
-        pre_data = df["ds"].strftime("%m/%d/%Y")
-        output[pre_data] = df["yhat"]
+    for df in prediction_list:      
+        output['dates'] = df["ds"].strftime("%m/%d/%Y")
+        output['cases'] = df["yhat"]  
     return output
+
+
+
+
 
