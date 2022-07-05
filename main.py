@@ -47,12 +47,14 @@ def get_prediction(days: Data_input):
 
 @app.post("/death/daily")
 def get_prediction(days: Data_input):
-    day = days.day   
-    prediction_list = predict_death(day)  
-    response_object =  convert_death(prediction_list)
-    print(response_object)
-    data.append(response_object)
-return data
+    data = []
+    day = days.day
+    for x in range(day):  
+        prediction_list = predict_death(day)  
+        response_object =  convert_death(prediction_list)
+        print(response_object)
+        data.append(response_object)
+    return data
    
 
 
