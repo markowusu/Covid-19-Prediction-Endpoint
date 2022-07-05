@@ -7,7 +7,7 @@ from typing import  Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from model import predict_confirmed, convert_confirmed,predict_death,convert_death,
+from model import predict_confirmed, convert_confirmed,predict_death,convert_death
 
 app = FastAPI()
 
