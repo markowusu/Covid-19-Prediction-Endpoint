@@ -2,14 +2,30 @@ import datetime
 import pickle
 import pandas as pd
 import numpy as np
-from fbprophet import Prophet
+from prophet import Prophet
 from typing import  Union
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
 from model import predict_confirmed, convert_confirmed,predict_death,convert_death
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = [
+    
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 # pydantic models
