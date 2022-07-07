@@ -2,7 +2,7 @@ import datetime
 import pickle
 import pandas as pd
 import numpy as np
-from fbprophet import Prophet
+# from fbprophet import Prophet
 pd.set_option("display.float_format",lambda x: '%.f' % x)
 
 TODAY = datetime.date.today()
