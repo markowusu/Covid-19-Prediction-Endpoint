@@ -7,11 +7,8 @@ from typing import  Union
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
 from model import predict_confirmed, convert_confirmed,predict_death,convert_death
-
-app = FastAPI()
-
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -29,8 +26,6 @@ app.add_middleware(
 )
 
 # pydantic models
-
-
 class Data_input(BaseModel):
     day: int
 
@@ -38,8 +33,6 @@ class Data_input(BaseModel):
 
 
 # routes
-
-
 @app.get("/ping")
 async def pong():
     return {"ping": "pong!"}
