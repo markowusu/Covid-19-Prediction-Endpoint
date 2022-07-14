@@ -2,7 +2,6 @@ import datetime
 import pickle
 import pandas as pd
 import numpy as np
-import prophet
 from typing import  Union
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,7 +58,7 @@ def get_prediction(days: Data_input):
     data = []
     day = days.day
     for x in range(day):  
-        prediction_list = predict_death(day)  
+        prediction_list = predict_death(x)  
         response_object =  convert_death(prediction_list)
         print(response_object)
         data.append(response_object)
