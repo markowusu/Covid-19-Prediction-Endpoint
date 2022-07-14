@@ -2,7 +2,7 @@ import datetime
 import pickle
 import pandas as pd
 import numpy as np
-# from fbprophet import Prophet
+from prophet import Prophet
 pd.set_option("display.float_format",lambda x: '%.f' % x)
 
 TODAY = datetime.date.today()
@@ -38,8 +38,8 @@ def predict_confirmed(days):
 def convert_confirmed(prediction_list):
     output={}
     for df in prediction_list:
-        output['dates'] = df["ds"].strftime("%m/%d/%Y")
-        output['cases'] = df["yhat"]
+        date = df["ds"].strftime("%m/%d/%Y")
+        output[date] = df["yhat"]
     return output
 
 
@@ -57,8 +57,8 @@ def predict_death(days):
 def convert_death(prediction_list):
     output={}
     for df in prediction_list:      
-        output['dates'] = df["ds"].strftime("%m/%d/%Y")
-        output['cases'] = df["yhat"]  
+        date = df["ds"].strftime("%m/%d/%Y")
+        output[date] = df["yhat"]  
     return output
 
 

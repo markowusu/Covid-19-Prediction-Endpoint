@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from model import predict_confirmed, convert_confirmed,predict_death,convert_death
 from fastapi.middleware.cors import CORSMiddleware
 
+
 app = FastAPI()
 
 origins = [
@@ -41,28 +42,20 @@ async def pong():
 
 @app.post("/confirmed/daily")
 def get_prediction(days: Data_input):
-    data = []
     day = days.day
-    for x in range(day):
-        prediction_list = predict_confirmed(x)  
-        response_object =  convert_confirmed(prediction_list)
-        print(response_object)
-        data.append(response_object)
-    return data
+    prediction_list = predict_confirmed(day)  
+    response_object =  {"forecast": convert_confirmed(prediction_list)}
+    return response_object
    
 
 #Route For Death Cases
 
 @app.post("/death/daily")
 def get_prediction(days: Data_input):
-    data = []
     day = days.day
-    for x in range(day):  
-        prediction_list = predict_death(x)  
-        response_object =  convert_death(prediction_list)
-        print(response_object)
-        data.append(response_object)
-    return data
+    prediction_list = predict_death(day)  
+    response_object =  {"forecast": convert_death(prediction_list)}
+    return response_object
    
 
 
