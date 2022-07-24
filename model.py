@@ -26,7 +26,7 @@ TODAY = datetime.date.today()
 
 #predicting Confirmed Cases
 def predict_confirmed(days):
-    model =pickle.load(open('confirmed_model.pkl',"rb"))
+    model =pickle.load(open('confirm_model.pkl',"rb"))
     future =TODAY + datetime.timedelta(days=days)
     dates = pd.date_range(start=TODAY,end=future.strftime("%m/%d/%Y"),)
     df = pd.DataFrame({"ds":dates})
