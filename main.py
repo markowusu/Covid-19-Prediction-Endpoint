@@ -46,6 +46,10 @@ def get_prediction(days: Data_input):
     prediction_list = predict_confirmed(day)  
     response_object =  {"forecast": convert_confirmed(prediction_list)}
     return response_object
+
+
+
+
    
 
 #Route For Death Cases
@@ -56,7 +60,7 @@ def get_prediction(days: Data_input):
     prediction_list = predict_death(day)  
     response_object =  {"forecast": convert_death(prediction_list)}
     return response_object
-   
+
 
 
 
