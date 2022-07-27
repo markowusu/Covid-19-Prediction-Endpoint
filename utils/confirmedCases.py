@@ -1,10 +1,13 @@
 import pandas as pd 
-result_df = []
+result_cases= []
+result_labels= []
 def getConfrimedcase():
-    file_csv = pd.read_csv("/Users/markowusu/covid-project/Backend--ML-final-year/utils/covid_19_clean_complete_2022.csv")
-    file_csv.drop(file_csv.columns[[0,1,2]], axis=1, inplace=True)
-    print(file_csv)
+    file_csv = pd.read_csv("/Users/markowusu/covid-project/Backend--ML-final-year/utils/confirmed.csv")
     
+    for _, row in file_csv.iterrows():
+        result_cases.append(row["Date"])
+        result_labels.append(row["Confirmed"])
+    print(result_cases)
 
 if __name__ == '__main__':
     getConfrimedcase()
