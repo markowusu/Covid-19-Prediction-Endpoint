@@ -1,6 +1,7 @@
 import datetime
 import pickle
 import pandas as pd
+import joblib
 import numpy as np
 from prophet import Prophet
 pd.set_option("display.float_format",lambda x: '%.f' % x)
@@ -62,6 +63,10 @@ def convert_death(prediction_list):
     return output
 
 
-
-
-
+#  TODO: create a pipeline for the model and store in the cache in a Joblib format 
+def sentiment_analysis():
+    model = joblib.load(open('utils/sentiment_analysis.joblib','rb'))
+    output = model.predict()
+         
+    return output
+        

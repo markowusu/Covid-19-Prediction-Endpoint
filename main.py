@@ -6,7 +6,7 @@ from typing import  Union
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from model import predict_confirmed, convert_confirmed,predict_death,convert_death
+from model import predict_confirmed, convert_confirmed,predict_death,convert_death, sentiment_analysis
 from fastapi.middleware.cors import CORSMiddleware
 
 
@@ -48,12 +48,14 @@ def get_prediction(days: Data_input):
     return response_object
 
 
-
+@app.get("/sentiment")
+def get_sentiment_analysis():
+    response=  sentiment_analysis()
+    return response
 
    
 
 #Route For Death Cases
-
 @app.post("/death/daily")
 def get_prediction(days: Data_input):
     day = days.day
