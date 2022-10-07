@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from model import predict_confirmed, convert_confirmed,predict_death,convert_death, sentiment_analysis
 from fastapi.middleware.cors import CORSMiddleware
 
-
+model = ""
 app = FastAPI()
 
 origins = [
@@ -48,10 +48,10 @@ def get_prediction(days: Data_input):
     return response_object
 
 
-@app.get("/sentiment")
-def get_sentiment_analysis():
-    response=  sentiment_analysis()
-    return response
+@app.get("/sentiment/{text}")
+def get_sentiment_analysis(text: str ):
+    response=  sentiment_analysis(str(text))
+    return {"msg": response}
 
    
 
@@ -67,5 +67,8 @@ def get_prediction(days: Data_input):
 
 
 
-
+# @app.on_event("startup")
+# def start_up():
+#     model = pickle.load(open('confirmed_model.pkl',"rb"))
+ 
 
